@@ -25,35 +25,42 @@ public class EncriptorTest {
 	public void crypt_word_hola() {
 		String expected = "jqnc";
 		String response = encriptor.cryptWord("hola");
-		assertThat(expected, equalTo(response));
+		assertThat(response, equalTo(expected));
 	}
 
 	@Test
 	public void crypt_word_hola_one_char_only() {
 		String expected = "hqla";
 		String response = encriptor.cryptWord("hola", "o");
-		assertThat(expected, equalTo(response));
+		assertThat(response, equalTo(expected));
 	}
 
+	@Test
+	public void crypt_word_hola_one_char_only_empty() {
+		String expected = "hola";
+		String response = encriptor.cryptWord("hola", "");
+		assertThat(response, equalTo(expected));
+	}
+	
 	@Test
 	public void crypt_word_hola_to_numbers() {
 		String expected = "10611311099";
 		String response = encriptor.cryptWordToNumbers("hola");
-		assertThat(expected, equalTo(response));
+		assertThat(response, equalTo(expected));
 	}
 
 	@Test
 	public void crypt_sentence() {
 		String expected = "jqnc.\"swg\"vcn\"guvcuA";
 		String response = encriptor.cryptSentence("hola, que tal estas?");
-		assertThat(expected, equalTo(response));
+		assertThat(response, equalTo(expected));
 	}
 
 	@Test
 	public void get_words() {
 		String[] expected = { "hola,", "que", "tal", "estas?" };
 		String[] response = encriptor.getWords("hola, que tal estas?");
-		assertThat(expected, equalTo(response));
+		assertThat(response, equalTo(expected));
 	}
 
 	@Test
@@ -63,7 +70,8 @@ public class EncriptorTest {
 
 		encriptor.printWords("hola, que tal estas?");
 		String expected = "<hola,><que><tal><estas?>";
-		assertThat(expected, equalTo(outContent.toString()));
+		String response = outContent.toString();
+		assertThat(response, equalTo(expected));
 	}
 
 	@Test(expected = InvalidParameterException.class)
