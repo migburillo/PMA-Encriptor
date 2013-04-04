@@ -6,17 +6,8 @@ public class Encriptor {
 	
 	public String cryptWord(String word)
 	{
-		checkValidInput(word);
-		
-		char[] wordArray = word.toCharArray();
-		String newWord = "";
-		for (int i = 0; i < word.length(); i++)
-		{
-			int charValue = wordArray[i];
-			newWord += String.valueOf((char)( charValue + 2));
-		}
-		
-		return newWord;
+		checkValidInput(word);		
+		return cryptChars(word);		
 	}
 	
 	public String cryptWordToNumbers(String word)
@@ -57,15 +48,7 @@ public class Encriptor {
 	
 	public String cryptSentence(String sentence)
 	{
-		char[] sentenceArray = sentence.toCharArray();
-		String newWord = "";
-		for (int i = 0; i < sentence.length(); i++)
-		{
-			int charValue = sentenceArray[i];
-			newWord += String.valueOf((char)( charValue + 2));
-		}
-		
-		return newWord;
+		return cryptChars(sentence);		
 	}
 	
 	public String[] getWords(String sentence)
@@ -80,6 +63,19 @@ public class Encriptor {
 		{
 			System.out.print("<" + word + ">");
 		}
+	}
+	
+	private String cryptChars(String chars)
+	{
+		char[] charArray = chars.toCharArray();
+		String newWord = "";
+		for (int i = 0; i < chars.length(); i++)
+		{
+			int charValue = charArray[i];
+			newWord += String.valueOf((char)( charValue + 2));
+		}
+		
+		return newWord;		
 	}
 	
 	private void checkValidInput(String word) 
