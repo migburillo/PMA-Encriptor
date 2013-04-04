@@ -7,22 +7,14 @@ public class Encriptor {
 	public String cryptWord(String word)
 	{
 		checkValidInput(word);		
-		return cryptChars(word);		
+		return cryptChars(word, false);		
 	}
 	
 	public String cryptWordToNumbers(String word)
 	{
 		checkValidInput(word);
 		
-		char[] wordArray = word.toCharArray();
-		String newWord = "";
-		for (int i = 0; i < word.length(); i++)
-		{
-			int charValue = wordArray[i];
-			newWord += String.valueOf(charValue + 2);
-		}
-		
-		return newWord;
+		return cryptChars(word, true);	
 	}
 
 	public String cryptWord(String word, String charsToReplace)
@@ -48,7 +40,7 @@ public class Encriptor {
 	
 	public String cryptSentence(String sentence)
 	{
-		return cryptChars(sentence);		
+		return cryptChars(sentence, false);		
 	}
 	
 	public String[] getWords(String sentence)
@@ -65,14 +57,18 @@ public class Encriptor {
 		}
 	}
 	
-	private String cryptChars(String chars)
+	private String cryptChars(String chars, Boolean toNumbers)
 	{
 		char[] charArray = chars.toCharArray();
 		String newWord = "";
 		for (int i = 0; i < chars.length(); i++)
 		{
 			int charValue = charArray[i];
-			newWord += String.valueOf((char)( charValue + 2));
+			if (toNumbers) {
+				newWord += String.valueOf(charValue + 2);
+			} else {
+				newWord += String.valueOf((char) (charValue + 2));
+			}
 		}
 		
 		return newWord;		
