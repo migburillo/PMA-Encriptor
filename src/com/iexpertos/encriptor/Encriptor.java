@@ -6,8 +6,7 @@ public class Encriptor {
 	
 	public String cryptWord(String word)
 	{
-		if (word.contains(" "))
-			throw new InvalidParameterException();
+		checkValidInput(word);
 		
 		char[] wordArray = word.toCharArray();
 		String newWord = "";
@@ -22,8 +21,7 @@ public class Encriptor {
 	
 	public String cryptWordToNumbers(String word)
 	{
-		if (word.contains(" "))
-			throw new InvalidParameterException();
+		checkValidInput(word);
 		
 		char[] wordArray = word.toCharArray();
 		String newWord = "";
@@ -38,8 +36,7 @@ public class Encriptor {
 
 	public String cryptWord(String word, String charsToReplace)
 	{
-		if (word.contains(" "))
-			throw new InvalidParameterException();
+		checkValidInput(word);
 		
 		char[] wordArray = word.toCharArray();
 		char[] replacement = charsToReplace.toCharArray();
@@ -85,4 +82,9 @@ public class Encriptor {
 		}
 	}
 	
+	private void checkValidInput(String word) 
+	{
+		if (word.contains(" "))
+			throw new InvalidParameterException();
+	}
 }
