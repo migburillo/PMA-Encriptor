@@ -23,19 +23,26 @@ public class Encriptor {
 		
 		char[] wordArray = word.toCharArray();
 		char[] replacement = charsToReplace.toCharArray();
-		char[] result = wordArray.clone();
+
+		String newWord = "";
+		Boolean replaced;
 		for (int i = 0; i < wordArray.length; i++)
 		{
+			replaced = false;
 			for (int j = 0; j < replacement.length; j++)
 			{
 				if (replacement[j] == wordArray[i])
 				{
 					int charValue = wordArray[i];
-					result[i] = (char)( charValue + 2);		
+					newWord += String.valueOf((char) (charValue + 2));
+					replaced = true;
 				}
 			}
+			if (!replaced) {
+				newWord += String.valueOf((char) wordArray[i]);
+			}
 		}
-		return String.valueOf(result);
+		return newWord;
 	}
 	
 	public String cryptSentence(String sentence)
