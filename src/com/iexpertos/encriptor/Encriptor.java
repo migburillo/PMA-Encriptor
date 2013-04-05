@@ -22,24 +22,16 @@ public class Encriptor {
 		checkValidInput(word);
 		
 		char[] wordArray = word.toCharArray();
-		char[] replacement = charsToReplace.toCharArray();
 
 		String newWord = "";
-		Boolean replaced;
-		for (int i = 0; i < wordArray.length; i++)
+		
+		for (char character : wordArray)
 		{
-			replaced = false;
-			for (int j = 0; j < replacement.length; j++)
-			{
-				if (replacement[j] == wordArray[i])
-				{
-					int charValue = wordArray[i];
-					newWord += String.valueOf((char) (charValue + 2));
-					replaced = true;
-				}
-			}
-			if (!replaced) {
-				newWord += String.valueOf((char) wordArray[i]);
+			if (charsToReplace.contains(String.valueOf(character))) {
+				int charValue = character;
+				newWord += String.valueOf((char) (charValue + 2));
+			} else {
+				newWord += String.valueOf((char) character);
 			}
 		}
 		return newWord;
