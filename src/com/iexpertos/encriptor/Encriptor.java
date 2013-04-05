@@ -51,23 +51,31 @@ public class Encriptor {
 		for (char character : charArray)
 		{
 			if (charsToReplace.length() > 0) {
-				if (charsToReplace.contains(String.valueOf(character))) {
-					int charValue = character;
-					newWord += String.valueOf((char) (charValue + 2));
-				} else {
-					newWord += String.valueOf(character);
-				}
+				newWord += getCryptChar(character, charsToReplace);
 			} else {
-				int charValue = character;
-				if (toNumbers) {
-					newWord += String.valueOf(charValue + 2);
-				} else {
-					newWord += String.valueOf((char) (charValue + 2));
-				}
+				newWord += getCryptChar(character, toNumbers);
 			}
 		}
 		
 		return newWord;		
+	}
+	
+	private String getCryptChar(char character, String charsToReplace)
+	{
+		if (charsToReplace.contains(String.valueOf(character))) {
+			int charValue = character;
+			return String.valueOf((char) (charValue + 2));
+		}
+		return String.valueOf(character);
+	}
+	
+	private String getCryptChar(char character,  Boolean toNumbers)
+	{
+		int charValue = character;
+		if (toNumbers) {
+			return String.valueOf(charValue + 2);
+		}
+			return String.valueOf((char) (charValue + 2));
 	}
 	
 	private void checkValidInput(String word) 
