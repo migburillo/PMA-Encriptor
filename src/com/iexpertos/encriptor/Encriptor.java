@@ -7,39 +7,27 @@ public class Encriptor {
 	public String cryptWord(String word)
 	{
 		checkValidInput(word);		
-		return cryptChars(word, false);		
+		return cryptChars(word, false, "");		
 	}
 	
 	public String cryptWordToNumbers(String word)
 	{
-		checkValidInput(word);
-		
-		return cryptChars(word, true);	
+		checkValidInput(word);		
+		return cryptChars(word, true, "");	
 	}
 
 	public String cryptWord(String word, String charsToReplace)
 	{
 		checkValidInput(word);
-		
-		char[] wordArray = word.toCharArray();
-
-		String newWord = "";
-		
-		for (char character : wordArray)
-		{
-			if (charsToReplace.contains(String.valueOf(character))) {
-				int charValue = character;
-				newWord += String.valueOf((char) (charValue + 2));
-			} else {
-				newWord += String.valueOf((char) character);
-			}
+		if(charsToReplace.length() >0){
+			return cryptChars(word, false, charsToReplace);
 		}
-		return newWord;
+		return word;
 	}
 	
 	public String cryptSentence(String sentence)
 	{
-		return cryptChars(sentence, false);		
+		return cryptChars(sentence, false, "");		
 	}
 	
 	public String[] getWords(String sentence)
@@ -56,17 +44,26 @@ public class Encriptor {
 		}
 	}
 	
-	private String cryptChars(String chars, Boolean toNumbers)
+	private String cryptChars(String chars, Boolean toNumbers, String charsToReplace)
 	{
 		char[] charArray = chars.toCharArray();
 		String newWord = "";
-		for (int i = 0; i < chars.length(); i++)
+		for (char character : charArray)
 		{
-			int charValue = charArray[i];
-			if (toNumbers) {
-				newWord += String.valueOf(charValue + 2);
+			if (charsToReplace.length() > 0) {
+				if (charsToReplace.contains(String.valueOf(character))) {
+					int charValue = character;
+					newWord += String.valueOf((char) (charValue + 2));
+				} else {
+					newWord += String.valueOf(character);
+				}
 			} else {
-				newWord += String.valueOf((char) (charValue + 2));
+				int charValue = character;
+				if (toNumbers) {
+					newWord += String.valueOf(charValue + 2);
+				} else {
+					newWord += String.valueOf((char) (charValue + 2));
+				}
 			}
 		}
 		
