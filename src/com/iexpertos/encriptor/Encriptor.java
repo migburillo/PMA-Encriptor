@@ -49,25 +49,32 @@ public class Encriptor {
 		char[] charArray = chars.toCharArray();
 		String newWord = "";
 		for (char character : charArray) {
-			if (charsToReplace.length() > 0) {
-				newWord += String.valueOf(getCryptChar(character,
-						charsToReplace));
-			} else if (toNumbers) {
-				newWord += String.valueOf(getAsciiModified(character));
+			if(needEncription(character, charsToReplace)) {
+				newWord += cryptChar(character, toNumbers);
 			} else {
-				newWord += String.valueOf((char) getAsciiModified(character));
+				newWord += String.valueOf(character);
 			}
 		}
 		
 		return newWord;		
 	}
 	
-	private char getCryptChar(char character, String charsToReplace)
+	private boolean needEncription(char character, String charsToReplace)
 	{
-		if (charsToReplace.contains(String.valueOf(character))) {
-			return (char) getAsciiModified(character);
+		if( charsToReplace.length() > 0) {
+			return (charsToReplace.contains(String.valueOf(character)));					 
 		}
-		return character;
+		return true;	
+		
+	}
+	
+	private String cryptChar(char character, Boolean toNumbers)
+	{
+		if (toNumbers) {
+			return String.valueOf(getAsciiModified(character));
+		} else {
+			return String.valueOf((char) getAsciiModified(character));
+		}		
 	}
 	
 	private int getAsciiModified(char character)
